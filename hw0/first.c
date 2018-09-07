@@ -7,5 +7,7 @@ int main() {
           if (i % 3 == 0 || i % 5 == 0) {
                sum += i;
           }
-     } return sum;
+     }
+     printf("The sum is %d\n", sum);
+     return 0;
 }
