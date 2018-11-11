@@ -3,10 +3,13 @@
 ## 11/08/18 - signals
 
 - you can man 7 signals to read more about signals
-- seg faults are sent by OS to terminate code(kill - 11 gives seg  fault errors)
-- kill -SIGSTOP PID stops a program, and SIGRES can resume it
+- ```kill -9``` sends kill signal
+- seg faults are sent by OS to terminate code(```kill - 11``` gives seg fault errors)
+- ```kill -SIGSTOP``` PID stops a program, and ```fg``` can resume it
 - after killing a process, it may still be in the foreground, so you can type(fg) to get rid of them
-- killall -9 a.out will immediately completely remove a process
+- ```kill -L``` lists all killable processes
+- ```ps -au``` shows all processes
+- use ```| grep PID``` to get **just** that process
 - there has to be a static void function sighandler in C(it cant be called from other files):
 
 ```
@@ -22,7 +25,10 @@ static void sighandler(int signo) {
 
 int main () {
 	signal(SIGSEGV, sighandler); // this allows sigsev to be handled
-
+	while(1) {
+		printf("hello, I'm: %d\n", getpid() );
+		sleep(1);
+	}
 }
 
 ```
@@ -32,13 +38,14 @@ Signals in C programs: ```<signal.h>```
 **kill**
 
 - ```kill(pid, signal); ```
-- returns 0 on success or -1 if not
+- returns(errno) 0 on success or -1 if not
 
 **signal**
 
-- ```signal(SIGNUM, sighandler) ```
+- ```signal(SIGNUM, sighandler) ``` this attaches a signal to the sighandler function(it "listens" for each signal)
 - ```getpid();``` gets the pid of running process
 - ```SIGKILL``` cannot be intercepted
+- **you** can decide what to do after intercepting a signal, you can kill it with ```kill -SIGUSR1```
 - you dont want to ```kill -9``` your web server/bash etc because there are some things it must do before it closes, and it cant do so if you force it to close.
 - ```kill -L``` lists all processes you can kill
 * files under /proc lists all files such as uptime
