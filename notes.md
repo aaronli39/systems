@@ -1,5 +1,53 @@
 # SYSTEMS
 
+-----
+
+## 11/13/18 - executing
+####The ```exec``` family - ```<unistd.h>```
+* a group of c functions that can be used to run other programs.
+* replaces the curent process with the new program(turns the other program into this program)
+
+####execl
+* ```execl(path, command, arg0, arg1 ... NULL)```
+	* **path**: the path to the program(eg: "/bin/ls")
+	* **command**: the name of the program(eg: "ls")
+	* **arg0**... : each command line argument you wish to give the program(eg: "-a," "-l")
+
+####execlp
+* ```execlp(path, command, arg0, arg1, ... NULL)```
+	* works like ```execl```, except it uses the $PATH environment variable commands
+	* for example, you can us "ls" as the *path* instead of "/bin/ls"
+	* to check the path, use: ```echo $PATH```
+
+####execvp
+* ```execvp(path, argument_array)```
+	* **argument_array**: array of strings containing the arguments to the command
+	* argument_array[0] must be the name of the program
+	* the last entry **must** be NULL
+
+####strsep- ```<string.h>```
+
+parse a string with a common delimiter
+* ```strsep(source, delimiter)```
+ 	* locates the first occurence of any of the spiecified *delimiters* in a string and replaces it with NULL
+	* *delimiters* is a string, each character is interpreted as a distinct delimiter
+	* returns the beginning of the original string, sets *source* to the string starting at 1 index past the location of the new NULL
+	* since *source*'s value is changed, it must be a pointer to a string(char **).
+
+example:
+```
+char line[100] = "woah-this-is-cool";
+char *s1 = line;
+strsep(&s1, "-")
+```
+
+* replaces the - after wow with NULL
+* returns a pointer to the w in "woah"
+* sets s1 to point to the t in "this-is-cool"
+* **we can use ```strsep``` to pass paths into ```execvp```**
+
+-----
+
 ## 11/08/18 - signals
 
 - you can man 7 signals to read more about signals
@@ -43,7 +91,7 @@ Signals in C programs: ```<signal.h>```
 - ```kill -L``` lists all processes you can kill
 * files under /proc lists all files such as uptime
 
-
+-----
 
 ## 11/07/18 - Processes
 CTRL-D closes file
