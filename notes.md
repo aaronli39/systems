@@ -1,5 +1,7 @@
 # SYSTEMS
 
+## 11/14/18 -
+
 -----
 
 ## 11/13/18 - executing
@@ -125,7 +127,7 @@ CTRL-D closes file
 - pid 1 is the init process
 - getpid() -  ```<unistd.h>```
 - returns the current process's pid
-- getppid() - <unistd.h>
+- getppid() - ```<unistd.h>```
   - returns the current process's parent pid
   - What happens when you close a parent process?
     - subprocesses DO NOT ALWAYS close
@@ -134,8 +136,10 @@ CTRL-D closes file
   - you can kill a process with its PID
   - $kill -9 bash: closes current bash and all children
   - $kill -9 -1: logs you out
-* asdf
-11/07/18 -- Processes
+
+-----
+
+# 11/07/18 -- Processes
 
 * CTRL-D closes file
 
@@ -156,9 +160,9 @@ Proccesses:
 PID:
 * every process has a unique identifier called the pid
 * pid 1 is the init process
-* getpid() - <unistd.h>
+* ```getpid()``` - ```<unistd.h>```
 	* returns the current process's pid
-    * getppid() - <unistd.h>
+    * ```getppid()``` - ```<unistd.h>```
         * returns the current process's parent pid
 * What happens when you close a parent process?
     * subprocesses **DO NOT ALWAYS** close
