@@ -1,33 +1,69 @@
-# SYSTEMS
+# SYSTEMS - Aaron Li
 
-## 11/14/18 -
+
+## 11/15/18 - forking
+
+**```execvp()``` terminates the current program if successful, which is why you need a ```strerror()``` to print out errnos if ```execvp()``` doesnt work**
+
+#### ```fork()``` - ```<unistd.h>```
+* creates a separate process based on the current one, the new process is called a child, the original is the parent
+* the child process is a duplicate of the parent process
+* all parts of the parent process are copied, including stack and heap memory, and the file table
+* returns 0 to the child and the child's PID, or -1(errno) to the parent
+* this allows your main file to run while a child of the program runs ```execvp()```
+
+#### Managing wub processes: ```wait``` - ```<sys/wait.h>```
+* stops a parent process from running until any child has exited
+* returns the pid of the child that exited, or -1(errno), and gathers information about the child process(this is called reaping)
+* if multiple child processes exit, an arbitrary one will be reaped
+* ```wait(status)```
+	* ```status``` is used to store information about how the process exited
+	* **```status```** macros:
+		* **usage**: ```MACRO(status)```
+			* ```WIFEEXITED```: true if child exited normally
+			* ```WEXISTATUS```: the return value of the child
+			* ```WIFSIGNALED```: tue if child exited due to a signal03666
+
+```
+fork();
+fork();
+printf("Split!\n"); // this will print "split!" in terminal twice
+```
+
+
+
+-----
+
+## 11/14/18 - work day
+
+**```char **``` is a pointer to a pointer(So you can pass it in a function and modify it)**
 
 -----
 
 ## 11/13/18 - executing
-####The ```exec``` family - ```<unistd.h>```
+#### The ```exec``` family - ```<unistd.h>```
 * a group of c functions that can be used to run other programs.
 * replaces the curent process with the new program(turns the other program into this program)
 
-####execl
+#### execl
 * ```execl(path, command, arg0, arg1 ... NULL)```
 	* **path**: the path to the program(eg: "/bin/ls")
 	* **command**: the name of the program(eg: "ls")
 	* **arg0**... : each command line argument you wish to give the program(eg: "-a," "-l")
 
-####execlp
+#### execlp
 * ```execlp(path, command, arg0, arg1, ... NULL)```
 	* works like ```execl```, except it uses the $PATH environment variable commands
 	* for example, you can us "ls" as the *path* instead of "/bin/ls"
 	* to check the path, use: ```echo $PATH```
 
-####execvp
+#### execvp
 * ```execvp(path, argument_array)```
 	* **argument_array**: array of strings containing the arguments to the command
 	* argument_array[0] must be the name of the program
 	* the last entry **must** be NULL
 
-####strsep- ```<string.h>```
+#### strsep- ```<string.h>```
 
 parse a string with a common delimiter
 * ```strsep(source, delimiter)```
