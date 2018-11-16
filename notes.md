@@ -1,5 +1,13 @@
 # SYSTEMS - Aaron Li
 
+## 11/16/18 - wait
+
+* wait will wait until child process stops running
+* ```waitpid(pid, status, options)```:
+	* **pid**: the pid of the specific child to look for. if -1, will wait for any child(normal wait)
+	* **options**: can set other behavior for ```waitpid```, if 0, will work normally
+
+-----
 
 ## 11/15/18 - forking
 
@@ -22,7 +30,8 @@
 		* **usage**: ```MACRO(status)```
 			* ```WIFEEXITED```: true if child exited normally
 			* ```WEXISTATUS```: the return value of the child
-			* ```WIFSIGNALED```: tue if child exited due to a signal03666
+			* ```WIFSIGNALED```: true if child exited due to a signal
+			* ```WTERMSIG```: the signal number intercepted by the child
 
 ```
 fork();
