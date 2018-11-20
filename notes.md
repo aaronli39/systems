@@ -1,5 +1,11 @@
 # SYSTEMS - Aaron Li
 
+## 11/19/18 - shell
+
+* ```cd```, ```ls```, ```exit()``` are commands not programs in linux. Commands are located in one of the bins
+* you want a child process to execute commands/programs so that it doesnt overwrite the shell
+* **```&= 127```** makes any number positive(bit-wise operators)
+
 ## 11/16/18 - wait
 
 * wait will wait until child process stops running
@@ -38,8 +44,6 @@ fork();
 fork();
 printf("Split!\n"); // this will print "split!" in terminal twice
 ```
-
-
 
 -----
 
