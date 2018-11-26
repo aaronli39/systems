@@ -1,5 +1,46 @@
 # SYSTEMS - Aaron Li
 
+## 11/26/18 - file redirection
+
+**[free ssh](cloud9.io)**
+
+* you can type ```cat``` and start typing(without a source file), it will output the stdin as stdout
+* you can use ```>>``` to output twice, or ```>>>``` to output thrice, etc...
+* ```>``` is overwrite,(redirects stdout) ```>>``` is append, ```2>``` redirects stderr(overwrites the file, while ```2>>``` appends)
+* you need to use ```2>``` to redirect error msgs(stderror). ```&>``` will output stderror and stdout into file.
+	* eg: ```javac out.txt 2> error.txt```
+* you can also output to two files
+	* eg: ```ls > out.txt 2> out2.txt```
+
+**redirection(piping)**  	
+
+* outputs the stdout of first argument to stdin of next thing
+	* eg: ```ls -l | grep .txt | wc```
+* grep is basically a search
+* ```<``` redirects stdin from a file. The file is treated exactly like stdin, for example scanf() will read up until a newline is fonud
+* | (pipe) redirect stdout from one program to stdin of the next. Very useful for chaining progams together
+
+#### ```dup2``` - ```<unistd.h>```
+
+* ```dup2(fd1, fd2)```: redirects fd2 to fd1. *any* use of fd2 will now act as the file for fd1. closes the file that fd2 had refered to.
+
+#### ```dup``` - ```<unistd.h>```
+
+* duplicates an existing entry in the file table. returns a new file descriptor for the duplicate entry
+* duping ```dup2(7, 1) ``` replaces 1 with 7
+* **eg**:
+```
+int fd1, backup_stdout;
+backup_sdout = dup( STDOUT_FILENO ) 
+dup2(fd1, STDOUT_FILENO )
+dup2(backup_stdout, STDOUT_FILENO )
+```
+
+* a | b will run a in its entirety, output it to a temporary file, redirect it into b, and then run b, then delete the temporary file.
+
+
+-----
+
 ## 11/19/18 - shell
 
 * ```cd```, ```ls```, ```exit()``` are commands not programs in linux. Commands are located in one of the bins
