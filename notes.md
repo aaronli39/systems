@@ -1,5 +1,28 @@
 # SYSTEMS - Aaron Li
 
+## 12/07/18 - shared memory
+
+* pipes are nice but having a block of memory to write to is much nicer
+* memory/stuff that remains even after a process has ended
+
+#### shared memory ```<sys/shm.h>, <sys/ipc.h>, <sys/types.h>```
+
+* if two processes try to access same memory at the same time then it will crash
+* a segment of heap memory that can be accessed by mupltiple processes
+
+#### Shared memory(cont)
+
+**5 shared memory operations:**
+
+#### ftok - ```<sys/ipc.h>```
+* generate a key useful for IPC functions
+* use this to check to make sure you create a UNIQUE block of memory
+* ```ftok( path, x )```
+	* path: a path to some file, the file msut be accessible
+	* x: an int used to generate the key(ignore this for now)
+
+-----
+
 ## 11/27/18 - piping
 
 -----
@@ -16,7 +39,7 @@
 * you can also output to two files
 	* eg: ```ls > out.txt 2> out2.txt```
 
-**redirection(piping)**  	
+**redirection(piping)**
 
 * outputs the stdout of first argument to stdin of next thing
 	* eg: ```ls -l | grep .txt | wc```
@@ -35,7 +58,7 @@
 * **eg**:
 ```
 int fd1, backup_stdout;
-backup_sdout = dup( STDOUT_FILENO ) 
+backup_sdout = dup( STDOUT_FILENO )
 dup2(fd1, STDOUT_FILENO )
 dup2(backup_stdout, STDOUT_FILENO )
 ```
