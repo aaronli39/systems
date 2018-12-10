@@ -1,5 +1,40 @@
 # SYSTEMS - Aaron Li
 
+## 12/10/18 - controlling resources with semophores
+
+* IPC construct used to control acess to a shared resources(like a file or shared memory)
+* most commonly, a semophore is used as a counter representing how many processes can ccess a resource at a given time
+	* if a semophore has avalue of 3, then it can have 3 active "users"
+
+#### Semophe opeartions:
+
+* create a semophore
+* set initial avalue
+* up(s) / v(s) - atomic, if you up a semophore, u have to use down later. down = s--, up = s++. **upping** a semophoer unblocks a process.
+* ```down(s) / P(s)``` - atomic
+	* attempt to take the semophore
+	* if the semophore is 0, wait fr it to be available
+	* 0 means you dont have access, 1+ means more than 1 user
+* eg: dowwnning s means it wont be available till done
+```
+down(s);
+open(f);
+read/write
+up(s)
+```
+
+#### semget
+
+* get/access a semophore
+* returns the semophore decriptor to -1
+* ```semget(ke, const, flags)```
+	* key: unique identifier
+	* amounnt: semophoros are stored as sets of one or more. THe number of semophores to create/get in the set
+	* flags: includes permissions for the semophore
+		* IPC_CREAT
+
+-----
+
 ## 12/07/18 - shared memory
 
 * pipes are nice but having a block of memory to write to is much nicer
