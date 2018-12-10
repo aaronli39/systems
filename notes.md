@@ -33,6 +33,35 @@ up(s)
 	* flags: includes permissions for the semophore
 		* IPC_CREAT
 
+#### semctl - <sys/types.h> <sys/ipc.h> <sys/semh>
+* control the semophore, including:
+  * set the semophore value
+  * remove the semophore
+  * get the current value
+  * get/set semohphore metadata
+
+
+* ```semctl(descriptor, index, operation, data)```:
+	* descriptor: the retun value of semget
+	* index: the index of the semophore you want to control in the semophore set
+	* operation: 
+		* IPC_RMID: remove the semaphore
+		* SETVAL: set the value(requiers data)
+		* GETVAL: return the value
+	* data: variable for setting/storing semophore metadata
+	* type union semun: **you have to declare this union in your main c file**
+	* 
+	```
+	union semun {
+		int val; // used for SETVAL
+		struct semid_ds *buf; // Used for IPC_STAT and IPC_SET
+		unsigned short *array; // used for SETALL
+		struct seminfo *__buff;
+	}; ```
+
+* union?
+	* a c structre designed to hold only one value
+
 -----
 
 ## 12/07/18 - shared memory
