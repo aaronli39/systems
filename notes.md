@@ -11,12 +11,13 @@
 * create a semophore
 * set initial avalue
 * up(s) / v(s) - atomic, if you up a semophore, u have to use down later. down = s--, up = s++. **upping** a semophoer unblocks a process.
-* ```down(s) / P(s)``` - atomic
-	* attempt to take the semophore
-	* if the semophore is 0, wait fr it to be available
-	* 0 means you dont have access, 1+ means more than 1 user
+* `down(s) / P(s) `
+  * attempt to take the semophore
+  * if the semophore is 0, wait fr it to be available
+  * 0 means you dont have access, 1+ means more than 1 user
+
 * eg: dowwnning s means it wont be available till done
-```
+```c
 down(s);
 open(f);
 read/write
@@ -41,26 +42,43 @@ up(s)
   * get/set semohphore metadata
 
 
-* ```semctl(descriptor, index, operation, data)```:
-	* descriptor: the retun value of semget
-	* index: the index of the semophore you want to control in the semophore set
-	* operation: 
-		* IPC_RMID: remove the semaphore
-		* SETVAL: set the value(requiers data)
-		* GETVAL: return the value
-	* data: variable for setting/storing semophore metadata
-	* type union semun: **you have to declare this union in your main c file**
-	* 
-	```
-	union semun {
-		int val; // used for SETVAL
-		struct semid_ds *buf; // Used for IPC_STAT and IPC_SET
-		unsigned short *array; // used for SETALL
-		struct seminfo *__buff;
-	}; ```
+* **semctl(descriptor, index, operation, data):**
+  * descriptor: the retun value of semget
+  * index: the index of the semophore you want to control in the semophore set
+  * operation: **you only need to use one of these**
+    * IPC_RMID: remove the semaphore
+    * SETVAL: set the value(requiers data)
+  	* GETVAL: return the value
+* data: variable for setting/storing semophore metadata
+* type union semun: **you have to declare this union in your main c file:**
 
-* union?
-	* a c structre designed to hold only one value
+```c
+union semun {
+	int val; // used for SETVAL
+	struct semid_ds *buf; // Used for IPC_STAT and IPC_SET
+	unsigned short *array; // used for SETALL
+	struct seminfo *__buff;
+}; 
+```
+
+####  semop()
+
+* perform an atomic sequence
+* you can up/down a semaphore by any integer value, not just 1
+* `semop( descriptor, operation, amount)`
+  * amount: the amt of operations you want to perform on semaphore set
+  * peration: a pointer to a struct sembuf:
+  *	`
+	struct sembuf {
+		short sem_op;
+		short sem_num;
+		short sem_flag;
+	}
+	`
+   * sem num: the index of teh semaphore you want to work on
+   * sem op: down(s): any negative number, up(s): any positive number, 0: block until semaphore reaches 0
+   * sem flag:
+	 * sem_UNDO: allow the os to undo the igven operation, useful in the event a program exsts before it could release
 
 -----
 
