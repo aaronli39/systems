@@ -58,7 +58,7 @@ union semun {
 	struct semid_ds *buf; // Used for IPC_STAT and IPC_SET
 	unsigned short *array; // used for SETALL
 	struct seminfo *__buff;
-}; 
+};
 ```
 
 ####  semop()
@@ -68,18 +68,17 @@ union semun {
 * `semop( descriptor, operation, amount)`
   * amount: the amt of operations you want to perform on semaphore set
   * peration: a pointer to a struct sembuf:
-  *	`
-	struct sembuf {
-		short sem_op;
-		short sem_num;
-		short sem_flag;
-	}
-	`
-   * sem num: the index of teh semaphore you want to work on
-   * sem op: down(s): any negative number, up(s): any positive number, 0: block until semaphore reaches 0
-   * sem flag:
-	 * sem_UNDO: allow the os to undo the igven operation, useful in the event a program exsts before it could release
-
+```c
+struct sembuf {
+	short sem_op;
+	short sem_num;
+	short sem_flag;
+}
+```
+* sem num: the index of teh semaphore you want to work on
+* sem op: down(s): any negative number, up(s): any positive number, 0: block until semaphore reaches 0
+* sem flag:
+* sem_UNDO: allow the os to undo the given operation, useful in the event a program exsts before it could release
 -----
 
 ## 12/07/18 - shared memory
