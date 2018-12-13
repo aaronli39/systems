@@ -6,7 +6,7 @@
 * most commonly, a semophore is used as a counter representing how many processes can ccess a resource at a given time
 	* if a semophore has avalue of 3, then it can have 3 active "users"
 
-#### Semophe opeartions:
+#### Semophore opeartions:
 
 * create a semophore
 * set initial avalue
@@ -28,7 +28,7 @@ up(s)
 
 * get/access a semophore
 * returns the semophore decriptor to -1
-* ```semget(ke, const, flags)```
+* ```semget(key, const, flags)```
 	* key: unique identifier
 	* amounnt: semophoros are stored as sets of one or more. THe number of semophores to create/get in the set
 	* flags: includes permissions for the semophore
