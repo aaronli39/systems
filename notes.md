@@ -1,5 +1,12 @@
 # SYSTEMS - Aaron Li
 
+## 12/14/18 - hyperthreading/multithreading
+
+* 8 threads available: 4 cores available and 4 leftovers
+* these "extra" cores give a boost to some processes soemtimes by doing a bit of extra work
+
+-----
+
 ## 12/10/18 - controlling resources with semophores
 
 * IPC construct used to control acess to a shared resources(like a file or shared memory)
