@@ -1,5 +1,45 @@
 # SYSTEMS - Aaron Li
 
+## 12/17/18 - name pipes(FIFOs)
+
+* named pipes are pipes are exist outsside a process/program
+* "p" for pipe in permissions in the termainal with ```ll```
+* it uses no space/disk until it is being used/called
+* ```cat > warrio``` will allow u to write to wario and you can view it with ```cat warrior``` on output
+* dont open a pipe twice from ```readin```(the one catting warrio)
+* if no stdout for warrio exists(closing a connection to one end of the pipe), then the stdin will close(the one you're typing ```cat > warrio``` into)
+* warrio will be size 0 even if you catted stuff in(always 0) it is never on disk and always buffered memory
+* you can pipe warrio into wc for example, and it will work as intended(```cat > warrio``` and in another terminal u have ```cat warrio | wc```)
+* if you ```rm warrio``` it still works, you can access it outside a program
+* ```mkfifo```:  shell command to make a FIFO. (```$ mkfifo name```)
+
+**```mkfifo - <sys/types.h> <sys/stat.h>```**
+* c function to create a FIFO
+* returns 0 on success and -1 on failure
+* once created, the FIFO will act like a regular file, and we can use open, read, write, and close on it
+* FIFOs willl block on open until both ends of the pipe have a connect(as soon as someone closes their side of the pipe, the whole thing is gone)
+* ```mkfifo( name, permissions)```
+
+```c
+// create pip, open, and print
+
+int main() {
+	int fd;
+
+	mkfifo("luigi", 0644);
+	print("pipe created\n");
+	fd = open("luigi", O_RDWR);
+	printf("pipe opened: %s\n", fd);
+
+	return 0;
+}
+```
+* you can use semophores to control who can write to a FIFO
+* parallel project idea wud be cool
+* do not **NEED** a client
+
+-----
+
 ## 12/14/18 - hyperthreading/multithreading
 
 * 8 threads available: 4 cores available and 4 leftovers
