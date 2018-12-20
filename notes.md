@@ -1,5 +1,39 @@
 # SYSTEMS - Aaron Li
 
+## 12/19/18 - nothing
+
+-----
+
+## 12/18/18 - handshake agreement
+
+**handshake**:
+* a procedure to ensure that a connection has been established between 2 programs
+* both ends of the connection must verify that they can send and receive data to and from each other
+* 3 way handshake(so that server/client knows they are engaged in "conversation"):
+	* client sends a message to the server
+	* server sends a response to client
+	* client sneds response back to server
+* how can we set up this connection?:
+* client create a named pipe, and tell the server the name of that pipe. now the server can open that pipe and send a response. it will write to the pipe and the client will send a respnose back(3rd way) to make sure its working.
+
+**server client/design pattern**:
+* 1 - setup:
+	* 1 - server creates a well known pipe FIFO and waits for a connection(cus everyone shud know about it)
+	* 2 - client creates a "private" FIFO
+* 2 - handshake:
+	* 1 - client connects to server and sends the private FIFO name. client waits for a response frmo the server
+	* 2 - server receives client's message and removes the WKP(well known pipe, or the server's pipe)
+	* 3 - server connects to client FIFO, sending an initial acknowledgement message
+	* 4 - client receives server's message and removes its private FIFO
+	* 5 - client sends response to server
+* **NOTE:** this handshake happens automatically when using network stuff(TCPIP)
+* 3 - operation
+	* 1 - server and client send information back and forth(compilaton setp)
+* 4 - reset:
+	* 1 - client exits, server closes any connection to the client
+	* 2 - server recreates the WKP and waits for another client
+-----
+
 ## 12/17/18 - name pipes(FIFOs)
 
 * named pipes are pipes are exist outsside a process/program
