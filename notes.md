@@ -1,5 +1,16 @@
 # SYSTEMS - Aaron Li
 
+
+## 01/03/19 - networking
+
+* router splits signals and it knows who each signal is for
+* stuy has 65k addresses for the CS department(just the cs department).
+* IPv4 has 4 octets
+* IPv6 has hexadecimals, and some blocks were backwards compatible
+* 127 block of IPv4 is "loopback" and every home network has one. However, you need a router to connect to the rest of the internet so that it knows where to route internet traffic to. 
+
+-----
+
 ## 12/19/18 - nothing
 
 -----
@@ -14,7 +25,7 @@
 	* server sends a response to client
 	* client sneds response back to server
 * how can we set up this connection?:
-* client create a named pipe, and tell the server the name of that pipe. now the server can open that pipe and send a response. it will write to the pipe and the client will send a respnose back(3rd way) to make sure its working.
+	* client create a named pipe, and tell the server the name of that pipe. now the server can open that pipe and send a response. it will write to the pipe and the client will send a respnose back(3rd way) to make sure its working.
 
 **server client/design pattern**:
 * 1 - setup:
@@ -36,7 +47,7 @@
 
 ## 12/17/18 - name pipes(FIFOs)
 
-* named pipes are pipes are exist outsside a process/program
+* named pipes are pipes that exist outsside a process/program
 * "p" for pipe in permissions in the termainal with ```ll```
 * it uses no space/disk until it is being used/called
 * ```cat > warrio``` will allow u to write to wario and you can view it with ```cat warrior``` on output
