@@ -1,5 +1,27 @@
 # SYSTEMS - Aaron Li
 
+## 01/04/19 - networking continued
+
+**socket**
+* a connection between 2 programs over a *network*
+* a socket corresponds to an IP address
+* a computer has 65,000 connections available
+* example ipv6: 0000 : 0000 : 0000 : 0000 : 004f : 13c2 : 0009 : a2d2
+* ipv4 to ipv6: 149.89.150.100 -> :: ffff : 149.89.150.100
+* if ISPs are smart, they can just give every home their own octet at the end of the ipv6 address, which would also lower latency
+* there are **2^128** ipv6 adddreses
+
+**to use a socket**(similar to named pipes):
+1) create socket
+2) bind it to an address/port
+3) listen/initiate a conversation
+4) send/receive data
+   
+* most services assume default port(port 80), and if you type another number like port 81 it will fail to connect because it's not a known service. 
+* games dont use well known ports such as port 22(ssh) because then they wouldn't be able to ssh since the ssh server won't be active
+* the port is kind of like the well known pipe, once something connects to the port, a process can open another secret connection in order to communicate.
+
+-----
 
 ## 01/03/19 - networking
 
