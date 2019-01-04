@@ -16,8 +16,8 @@
 2) bind it to an address/port
 3) listen/initiate a conversation
 4) send/receive data
-   
-* most services assume default port(port 80), and if you type another number like port 81 it will fail to connect because it's not a known service. 
+
+* most services assume default port(port 80), and if you type another number like port 81 it will fail to connect because it's not a known service.
 * games dont use well known ports such as port 22(ssh) because then they wouldn't be able to ssh since the ssh server won't be active
 * the port is kind of like the well known pipe, once something connects to the port, a process can open another secret connection in order to communicate.
 
@@ -29,7 +29,7 @@
 * stuy has 65k addresses for the CS department(just the cs department).
 * IPv4 has 4 octets
 * IPv6 has hexadecimals, and some blocks were backwards compatible
-* 127 block of IPv4 is "loopback" and every home network has one. However, you need a router to connect to the rest of the internet so that it knows where to route internet traffic to. 
+* 127 block of IPv4 is "loopback" and every home network has one. However, you need a router to connect to the rest of the internet so that it knows where to route internet traffic to.
 
 -----
 
