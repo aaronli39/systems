@@ -1,5 +1,15 @@
 # SYSTEMS - Aaron Li
 
+## 01/07/19 - sockets
+
+* sockets allow you to connect different computers
+* it makes sense that IPv4 and IPv6 addresses should be a string in code, but ports are also strings(not just numbers) b/c anything listed in the services file allows you to refer to the port by the name of the port(such as "ssh" for port 22).
+* **binding**: server only, doesn't block
+* ```listen()``` blocks
+* ```tcp``` extablishes network connection and process that manages the flow of input date, there is no gaurantee that you will find the pieces in order.
+
+-----
+
 ## 01/04/19 - networking continued
 
 **socket**
